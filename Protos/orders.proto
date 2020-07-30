@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Orders";
+
+package Order;
+
+service OrderPlacement {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderReply) {}
+  rpc GetOrderStatus (GetOrderStatusRequest) returns (stream GetOrderStatusResponse) {}
+}
+
+message CreateOrderRequest {
+  string productId = 1;
+  int32 quantity = 2;
+  string address = 3;
+}
+
+message CreateOrderReply {
+  string orderId = 1;
+}
+
+message GetOrderStatusRequest {
+  string orderId = 1;
+}
+
+message GetOrderStatusResponse {
+  string status = 1;
+}
